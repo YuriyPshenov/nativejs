@@ -9,13 +9,14 @@ type AddressType = {
 }
 
 type HousesType = {
+    id?: number
     buildedAt: number
     repaired: boolean
     address: AddressType
 }
 
 
-type GovermentBuildingsType = {
+export type GovermentBuildingsType = {
     type: "HOSPITAL" | "FIRE-STATION"
     budget: number
     staffCount: number
