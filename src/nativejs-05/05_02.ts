@@ -1,4 +1,3 @@
-
 type StreetType = {
     title: string
 }
@@ -9,13 +8,14 @@ type AddressType = {
 }
 
 type HousesType = {
+    id?: number
     buildedAt: number
     repaired: boolean
     address: AddressType
 }
 
 
-type GovermentBuildingsType = {
+export type GovermentBuildingsType = {
     type: "HOSPITAL" | "FIRE-STATION"
     budget: number
     staffCount: number
@@ -28,3 +28,9 @@ export type CityType = {
     governmentBuildings: Array<GovermentBuildingsType>
     citizensNumber: number
 }
+
+export const getStreetsTitlesOfGovernmentBuildings = (gb: GovermentBuildingsType[]) => gb.map(b => b.address.street.title)
+
+export const getStreetsTitlesOfHouses = (h: HousesType[]) => h.map(h => h.address.street.title)
+
+export const createMessages = (h: HousesType[]) => h.map(h => `Hello guys from ${h.address.street.title}`)

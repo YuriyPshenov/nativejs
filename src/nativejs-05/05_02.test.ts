@@ -1,5 +1,4 @@
-import {CityType} from "../nativejs-03/03";
-import {demolishHousesOnTheStreet, getBuildingsWithStaffCountGreaterThen} from "./04_02";
+import {CityType, createMessages, getStreetsTitlesOfGovernmentBuildings, getStreetsTitlesOfHouses} from "./05_02";
 
 let city: CityType;
 
@@ -67,22 +66,32 @@ beforeEach(() => {
     }
 })
 
-// 01. Дополните тип HouseType (добавьте порядковый id от 1 и по возрастанию)
-// 02. Создайте в том же файле ещё одну функцию, чтобы тесты прошли
-test('House should be destroyed', () => {
-    const newCity = demolishHousesOnTheStreet(city, 'Happy street');
+// 01. создайте в том же файле ещё одну функцию, чтобы тесты прошли
+test('list of streets titles of government buildings', ()=> {
+    let streetsNames = getStreetsTitlesOfGovernmentBuildings(city.governmentBuildings);
 
-    expect(newCity.houses.length).toBe(1);
-    expect(newCity.houses[0].id).toBe(1);
-
+    expect(streetsNames.length).toBe(2);
+    expect(streetsNames[0]).toBe("Central Str");
+    expect(streetsNames[1]).toBe("South Str");
 })
 
-// 03. Массив строений, где работают больше 500 людей
-test('buildings with correct staff count', () => {
+//02. создайте в том же файле ещё одну функцию, чтобы тесты прошли
+test('list of streets titles', ()=> {
+    let streetsNames = getStreetsTitlesOfHouses(city.houses);
 
-    let buildings = getBuildingsWithStaffCountGreaterThen(city.governmentBuildings, 500)
-
-    expect(buildings.length).toBe(1);
-    expect(buildings[0].type).toBe('FIRE-STATION')
+    expect(streetsNames.length).toBe(3);
+    expect(streetsNames[0]).toBe("White street");
+    expect(streetsNames[1]).toBe("Happy street");
+    expect(streetsNames[2]).toBe("Happy street");
 })
 
+//03. создайте в том же файле ещё одну функцию, чтобы тесты прошли
+test('create greeting messages for streets', ()=> {
+
+    let messages = createMessages(city.houses)
+
+    expect(messages.length).toBe(3)
+    expect(messages[0]).toBe("Hello guys from White street")
+    expect(messages[1]).toBe("Hello guys from Happy street")
+    expect(messages[2]).toBe("Hello guys from Happy street")
+})
